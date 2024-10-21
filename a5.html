@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll Number Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function getStudentDetails() {
+            const rollNumber = document.getElementById("rollNumber").value;
+            const yearCode = rollNumber.substring(2, 4);
+            const branchCode = rollNumber.substring(4, 6);
+            let year, branch;
+
+            // Determine the year of study based on the roll number
+            const currentYear = new Date().getFullYear() % 100; // Get last two digits of the current year
+            const yearDifference = currentYear - parseInt(yearCode);
+            if (yearDifference === 3) {
+                year = "Final year";
+            } else if (yearDifference === 2) {
+                year = "Third year";
+            } else if (yearDifference === 1) {
+                year = "Second year";
+            } else if (yearDifference === 0) {
+                year = "First year";
+            } else {
+                year = "Unknown year";
+            }
+
+            // Determine the branch based on the branch code
+            switch (branchCode.toUpperCase()) {
+                case "CS":
+                    branch = "CSE";
+                    break;
+                case "EC":
+                    branch = "ECE";
+                    break;
+                case "ME":
+                    branch = "Mechanical Engineering";
+                    break;
+                case "EE":
+                    branch = "Electrical Engineering";
+                    break;
+                default:
+                    branch = "Unknown branch";
+            }
+
+            // Display the result
+            document.getElementById("result").innerText = `The student belongs to ${year}, ${branch}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Student Roll Number Details</h2>
+    <input type="text" id="rollNumber" placeholder="Enter roll number (e.g., ES19CS01)">
+    <button onclick="getStudentDetails()">Get Details</button>
+    <p id="result"></p>
+</body>
+</html>
