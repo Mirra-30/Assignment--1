@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .counter-app {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-app">
+        <h1 id="counter">0</h1>
+        
+        <label>Start from: <input type="number" id="startValue" value="0"></label><br>
+        <label>Step: <input type="number" id="stepValue" value="1" min="1"></label><br>
+
+        <button onclick="startCounter()" id="startBtn">Start</button>
+        <button onclick="pauseCounter()" id="pauseBtn" disabled>Pause</button>
+        <button onclick="resetCounter()" id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+        let counter = 0;
+        let interval;
+        let isPaused = false;
+
+        function updateCounterDisplay() {
+            document.getElementById("counter").innerText = counter;
+        }
+
+        function startCounter() {
+            if (!interval) {
+                let startValue = parseInt(document.getElementById("startValue").value);
+                let stepValue = parseInt(document.getElementById("stepValue").value);
+                if (!isPaused) {
+                    counter = startValue;
+                }
+                updateCounterDisplay();
+                interval = setInterval(() => {
+                    counter += stepValue;
+                    updateCounterDisplay();
+                }, 1000);
+                document.getElementById("pauseBtn").disabled = false;
+                document.getElementById("startBtn").disabled = true;
+            }
+        }
+
+        function pauseCounter() {
+            clearInterval(interval);
+            interval = null;
+            isPaused = true;
+            document.getElementById("startBtn").disabled = false;
+            document.getElementById("pauseBtn").disabled = true;
+        }
+
+        function resetCounter() {
+            clearInterval(interval);
+            interval = null;
+            counter = 0;
+            isPaused = false;
+            updateCounterDisplay();
+            document.getElementById("startValue").value = 0;
+            document.getElementById("startBtn").disabled = false;
+            document.getElementById("pauseBtn").disabled = true;
+        }
+    </script>
+</body>
+      </html>
