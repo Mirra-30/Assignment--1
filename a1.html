@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo Box Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        label, select, input {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        select, input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-right: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #displayArea {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <label for="comboBox">Select an item:</label>
+    <select id="comboBox">
+        <option value="Item 1">Item 1</option>
+        <option value="Item 2">Item 2</option>
+        <option value="Item 3">Item 3</option>
+    </select>
+
+    <label for="newItem">New Item:</label>
+    <input type="text" id="newItem">
+
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="removeItem()">Remove Item</button>
+    <button onclick="displaySelectedItem()">Display Selected Item</button>
+
+    <p id="displayArea"></p>
+
+    <script>
+        function addItem() {
+            const comboBox = document.getElementById("comboBox");
+            const newItem = document.getElementById("newItem").value;
+
+            if (newItem.trim() !== "") {
+                const option = document.createElement("option");
+                option.text = newItem;
+                comboBox.add(option);
+                document.getElementById("newItem").value = "";
+            }
+        }
+
+        function removeItem() {
+            const comboBox = document.getElementById("comboBox");
+            comboBox.remove(comboBox.selectedIndex);
+        }
+
+        function displaySelectedItem() {
+            const comboBox = document.getElementById("comboBox");
+            const selectedItem = comboBox.options[comboBox.selectedIndex].text;
+            document.getElementById("displayArea").innerText = "Selected Item: " + selectedItem;
+        }
+    </script>
+
+</body>
+  </html>
