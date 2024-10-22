@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+</head>
+<body>
+    <h1>Password Generator</h1>
+    <button id="generateBtn">Generate Password</button>
+    <p id="passwordDisplay"></p>
+
+    <script>
+        function generatePassword() {
+            const length = 8;
+            const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const lowerCaseChars = 'abcdefghijklmnopqrstuvwxyz';
+            const digits = '0123456789';
+            const specialChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+            
+            let password = '';
+            let upperCaseCount = 0;
+            while (upperCaseCount < 2) {
+                const char = upperCaseChars[Math.floor(Math.random() * upperCaseChars.length)];
+                password += char;
+                upperCaseCount++;
+            }
+          
+            const digit = digits[Math.floor(Math.random() * digits.length)];
+            password += digit;
+            const remainingLength = length - password.length;
+            const allChars = upperCaseChars + lowerCaseChars + digits + specialChars;
+
+            for (let i = 0; i < remainingLength; i++) {
+                const char = allChars[Math.floor(Math.random() * allChars.length)];
+                password += char;
+            }
+            password = password.split('').sort(() => Math.random() - 0.5).join('');
+
+            return password;
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const password = generatePassword();
+            document.getElementById('passwordDisplay').innerText = password;
+        });
+    </script>
+</body>
+</html>
