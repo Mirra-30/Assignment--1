@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph Styling</title>
+</head>
+<body>
+
+    <h1>Style the Paragraph</h1>
+
+    <label>Font:</label>
+    <select id="fontSelect" onchange="updateStyle()">
+        <option>Arial</option>
+        <option>Courier New</option>
+        <option>Georgia</option>
+        <option>Times New Roman</option>
+        <option>Verdana</option>
+    </select>
+
+    <label>Size:</label>
+    <select id="fontSizeSelect" onchange="updateStyle()">
+        <option>16px</option>
+        <option>20px</option>
+        <option>24px</option>
+        <option>28px</option>
+    </select>
+
+    <label>Color:</label>
+    <input type="color" id="colorPicker" onchange="updateStyle()">
+
+    <p id="textArea">This is a customizable paragraph.</p>
+
+    <script>
+        function updateStyle() {
+            const textArea = document.getElementById('textArea');
+            textArea.style.fontFamily = document.getElementById('fontSelect').value;
+            textArea.style.fontSize = document.getElementById('fontSizeSelect').value;
+            textArea.style.color = document.getElementById('colorPicker').value;
+        }
+    </script>
+
+</body>
+</html>
