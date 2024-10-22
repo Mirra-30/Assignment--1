@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement Banner</title>
+    <style>
+        #banner {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            position: relative;
+        }
+        .ad {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            transition: left 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Advertisement Banner</h1>
+    <div id="banner">
+        <div class="ad" style="left: 0;">Ad 1: Buy One Get One Free!</div>
+        <div class="ad">Ad 2: 20% Off on All Products!</div>
+        <div class="ad">Ad 3: Free Shipping on Orders Over $50!</div>
+    </div>
+
+    <script>
+        const ads = document.querySelectorAll('.ad');
+        let currentAd = 0;
+
+        function showAd(index) {
+            ads.forEach((ad, i) => {
+                ad.style.left = (i === index) ? '0' : '100%';
+            });
+        }
+
+        function nextAd() {
+            currentAd = (currentAd + 1) % ads.length;
+            showAd(currentAd);
+        }
+
+        showAd(currentAd);
+        setInterval(nextAd, 3000);
+    </script>
+
+</body>
+</html>
